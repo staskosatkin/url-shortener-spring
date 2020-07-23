@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import com.example.urlshortener.entity.Url;
 import com.example.urlshortener.service.UrlService;
 
@@ -25,8 +24,9 @@ public class PublicController {
 		if (url == null) {
 			return ResponseEntity.notFound().build();
 		}
-		
+
 		HttpHeaders headers = new HttpHeaders();
+
 		headers.add("Location", url.getOriginalUrl());
 		
 		return new ResponseEntity<Object>(headers, HttpStatus.FOUND);

@@ -25,7 +25,7 @@ public class UrlServiceImpl implements UrlService {
 		url.setUserId(0);
 		urlRepository.save(url);
 		
-		return null;
+		return url;
 	}
 
 	@Override

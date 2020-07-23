@@ -1,5 +1,7 @@
 package com.example.urlshortener.rest;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.urlshortener.entity.Url;
 import com.example.urlshortener.service.UrlService;
@@ -28,7 +31,12 @@ public class UrlController {
 	{
 		urlService.store(url);
 		
-		return ResponseEntity.created(null).build();
+		URI location = ServletUriComponentsBuilder
+				.fromCurrentServletMapping()
+				.path("/{hash}")
+				.buildAndExpand(url.getHash()).toUri();
+		
+		return ResponseEntity.created(location).build();
 	}
 	
 }
