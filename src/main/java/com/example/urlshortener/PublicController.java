@@ -28,7 +28,7 @@ public class PublicController {
 		HttpHeaders headers = new HttpHeaders();
 
 		headers.add("Location", url.getOriginalUrl());
-		
+
 		return new ResponseEntity<Object>(headers, HttpStatus.FOUND);
 	}
 }
